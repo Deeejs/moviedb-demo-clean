@@ -19,25 +19,10 @@ A full-stack movie database application built with Next.js, NestJS, and Prisma.
 
 ## Quick Start
 
-### One-Command Setup (Quickest)
-
-```bash
-git clone <repository-url>
-cd moviedb-demo-clean
-
-# Copy environment file
-cp apps/backend/.env.example apps/backend/.env
-
-# Run everything in one command
-npm run setup
-```
-
-**Note:** If `npm run setup` fails, please continue with the Docker setup or manual setup.
-
 ### Docker Setup (Most Reliable)
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Deeejs/moviedb-demo-clean
 cd moviedb-demo-clean
 
 npm install
@@ -49,17 +34,22 @@ docker compose up
 # OR Docker Compose v1 (older)
 docker-compose up
 
-# Start the frontend
-npm run dev --workspace=frontend
+# Start the frontend (choose one method)
+npm run dev --workspace=frontend  # From root directory
+# OR
+cd apps/frontend && npm run dev    # From frontend directory
 ```
 
-This will automatically:
+**What Docker Compose does automatically:**
 
 - Start PostgreSQL database
 - Build and run the backend API
 - Apply database migrations
 - Seed the database with sample movies, actors, and ratings
-- Start the application
+
+**What you need to do:**
+
+- Start the frontend manually using one of the commands above
 
 **Access the application:**
 
@@ -73,12 +63,45 @@ This will automatically:
 
 ---
 
-## Manual Setup
+## Manual Setup (Existing Database Required)
+
+### One-Command Setup
+
+```bash
+git clone https://github.com/Deeejs/moviedb-demo-clean
+cd moviedb-demo-clean
+
+# Copy environment file
+cp apps/backend/.env.example apps/backend/.env
+# Edit apps/backend/.env if needed (default uses postgres:postgres@localhost:5432/moviedb)
+
+# Run everything in one command from root
+npm run setup
+```
+
+**Prerequisites for manual setup:**
+- PostgreSQL database running locally
+- Database named `moviedb` created (`createdb moviedb`)
+- Environment variables configured in `apps/backend/.env`
+
+**Note:** If `npm run setup` fails, please continue with the Docker setup or step-by-step manual setup.
+
+This will automatically:
+
+- Run npm install
+- Connect to PostgreSQL database
+- Seed the database with sample movies, actors, and ratings
+- Build and run the backend API
+- Start both frontend & backend applications
+
+---
+
+### Step-by-Step Manual Setup
 
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Deeejs/moviedb-demo-clean
    cd moviedb-demo-clean
    ```
 
@@ -106,7 +129,7 @@ This will automatically:
 4. **Set up database with sample data**
 
    ```bash
-   npm run db:setup
+   npm run db:setup  # Run from root directory
    ```
 
    **OR**
@@ -150,41 +173,6 @@ moviedb-demo-clean/
 │   ├── bruno-api/     # API testing collection
 │   └── scripts/       # Build & deployment scripts
 └── package.json       # Root package.json with scripts
-```
-
----
-
-## Frontend
-
-The frontend is built with Next.js 14+ App Router:
-
-- **Features:** Server Components, Server Actions
-- **Styling:** Tailwind CSS
-- **UI Components:** Shared component library
-
----
-
-### Database Connection Issues
-
-- Ensure PostgreSQL is running
-- Check `DATABASE_URL` in `apps/backend/.env`
-- Verify database exists: `createdb moviedb`
-
-### Port Conflicts
-
-- Backend runs on port 4000
-- Frontend runs on port 3000
-- Update ports in respective `.env` files if needed
-- Docker ports the host 5438 to 5432 to avoid conflicts
-
-### Fresh Start
-
-If you encounter issues, try a fresh database setup:
-
-```bash
-# From apps/backend directory
-cd apps/backend
-npx prisma migrate reset --force
 ```
 
 ---
@@ -250,6 +238,7 @@ npx prisma migrate reset --force
   ```
 
 - **View movie's actors:**
+
   ```bash
   curl "http://localhost:4000/actors/by-movie/{id}"
   ```
@@ -295,6 +284,128 @@ npx prisma migrate reset --force
   - [http://localhost:4000/movies/search?q=pulp](http://localhost:4000/movies/search?q=pulp)
 
 ---
+
+## Testing
+
+Run the test suite to ensure everything is working correctly:
+
+```bash
+# Run all tests
+npm run test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run specific test suites
+npm run test --workspace=backend
+npm run test --workspace=frontend
+```
+
+**Test Structure:**
+- **Backend Tests:** Located in `apps/backend/src/` with `.spec.ts` files
+- **Frontend Tests:** Located in `apps/frontend/src/` with `.test.tsx` files
+- **Integration Tests:** End-to-end tests in `tests/` directory
+
+---
+
+## Development Workflow
+
+### Code Quality
+```bash
+# Format code
+npm run format
+
+# Run linting
+npm run lint
+
+# Type checking
+npm run check-types
+
+# Run all quality checks
+npm run lint && npm run check-types && npm run test
+```
+
+### Environment Variables
+**Backend Environment Variables (`apps/backend/.env`):**
+
+- `DATABASE_URL`: PostgreSQL connection string for database access
+- `JWT_SECRET`: Secret key for JWT token generation and validation
+- `API_SECRET`: Bearer token for API authentication (default: `movie-api-secret-2024`)
+- `PORT`: Backend server port (default: 4000)
+- `NODE_ENV`: Environment mode (`development`, `production`, `test`)
+
+**Frontend Environment Variables (`apps/frontend/.env.local`):**
+- `NEXT_PUBLIC_API_URL`: Backend API URL (default: `http://localhost:4000`)
+
+### Contributing Guidelines
+1. Create a feature branch from `main`
+2. Run tests and linting before committing
+3. Write descriptive commit messages
+4. Ensure all tests pass and code is properly formatted
+5. Submit a pull request with a clear description
+
+---
+
+## Frontend
+
+The frontend is built with Next.js 14+ App Router:
+
+- **Features:** Server Components, Server Actions
+- **Styling:** Tailwind CSS
+- **UI Components:** Shared component library
+
+---
+
+## Troubleshooting
+
+### Common Issues & Solutions
+
+**Database Connection Issues:**
+- Ensure PostgreSQL is running
+- Check `DATABASE_URL` in `apps/backend/.env`
+- Verify database exists: `createdb moviedb`
+- For Docker: Ensure containers are running with `docker compose ps`
+
+**Port Conflicts:**
+- Backend runs on port 4000
+- Frontend runs on port 3000
+- Update ports in respective `.env` files if needed
+- Docker maps host port 5438 to container port 5432 to avoid conflicts
+
+**Docker Issues:**
+- Check Docker version: `docker --version` and `docker compose version`
+- Restart containers: `docker compose down && docker compose up`
+- View logs: `docker compose logs backend` or `docker compose logs db`
+
+**Build/Install Issues:**
+- Clear node_modules: `rm -rf node_modules && npm install`
+- Clear build cache: `npm run clean` (if available)
+- Check Node.js version: `node --version` (requires 18+)
+
+### Fresh Start
+
+If you encounter persistent issues, try a complete reset:
+
+```bash
+# Stop all processes
+docker compose down
+
+# Clean database
+cd apps/backend
+npx prisma migrate reset --force
+
+# Clean and reinstall dependencies
+cd ../..
+rm -rf node_modules
+npm install
+
+# Restart everything
+npm run setup
+```
+
 
 ## Tech Stack
 
