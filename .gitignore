@@ -74,3 +74,4 @@ lerna-debug.log*
 !.vscode/tasks.json
 
 
+**/package-lock.json
