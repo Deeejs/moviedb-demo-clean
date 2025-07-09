@@ -17,13 +17,28 @@ A full-stack movie database application built with Next.js, NestJS, and Prisma.
 
 ## Quick Start
 
-### Option 1: Docker (Easiest - Zero Configuration)
+cd moviedb-demo-clean
 
-**All platforms (Windows, Mac, Linux):**
+npm install
+
+npm run build front end and local package
+
+npm run dev
+
+Then continue with docker backend setup for ease
 
 ```bash
 git clone <repository-url>
 cd moviedb-demo-clean
+
+# Install dependencies
+npm install
+
+# Build frontend and shared packages
+npm run build
+
+# Start development environment
+npm run dev
 
 # Docker Compose v2 (newer)
 docker compose up
@@ -42,58 +57,13 @@ This will automatically:
 
 **Access the application:**
 
+- FrontEnd API: http://localhost:3000
 - Backend API: http://localhost:4000
 - Database: localhost:5438
-
-**To run the frontend (if not included in docker compose):**
-
-```bash
-cd apps/frontend
-npm install
-npm run dev
-```
-
-The frontend will be available at: http://localhost:3000
 
 **No additional setup required!** The Docker setup includes all environment variables and handles everything automatically.
 
 > **Note:** To check which Docker Compose version you have, run `docker compose version` or `docker-compose version`. Use the command that works for your system.
-
-### Option 2: Automated Setup Scripts
-
-**macOS/Linux:**
-
-```bash
-git clone <repository-url>
-cd moviedb-demo-clean
-./setup.sh
-npm run dev
-```
-
-**Windows:**
-
-```bash
-git clone <repository-url>
-cd moviedb-demo-clean
-setup.bat
-npm run dev
-```
-
-**Both scripts will:**
-
-- Install all dependencies
-- Create necessary .env files (root, backend, and frontend)
-- Run database migrations
-- Seed the database with sample data
-- Guide you through any manual configuration needed
-- Start both the backend API and frontend development servers.
-
-**Access the application:**
-
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:4000
-
-### Option 3: Manual Setup
 
 1. **Clone the repository**
 
@@ -222,6 +192,110 @@ If you encounter issues, try a fresh database setup:
 cd apps/backend
 npx prisma migrate reset --force
 ```
+
+### 🔧 API Documentation
+
+#### Option 1: Interactive Testing with Bruno (Recommended)
+
+**Bruno** is a modern API testing tool (like Postman). To use the complete API collection:
+
+1. **Download Bruno**: Go to [https://usebruno.com](https://usebruno.com) and download for your OS
+2. **Import Collection**: Open Bruno → File → Import Collection → Select `/tools/bruno-api/` folder
+3. **Select Environment**: Choose "Docker" or "Local" environment from dropdown
+4. **Test APIs**: Click any request to run it (all endpoints are pre-configured)
+
+**The Bruno collection includes:**
+
+- ✅ All 21 API endpoints pre-configured
+- ✅ Authentication automatically handled
+- ✅ Sample data in requests
+- ✅ Environment switching (Docker/Local)
+- ✅ Request documentation
+
+#### Option 2: Quick Testing with curl (Copy/Paste Ready)
+
+**No installation needed - just copy/paste these commands:**
+
+**Get all movies:**
+
+```bash
+curl http://localhost:4000/movies
+```
+
+**Search movies:**
+
+```bash
+curl "http://localhost:4000/movies/search?q=pulp"
+```
+
+**Search actors:**
+
+```bash
+curl "http://localhost:4000/actors/search?q=john"
+```
+
+**Create movie (requires API secret):**
+
+```bash
+curl -X POST http://localhost:4000/movies \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer movie-api-secret-2024" \
+  -d '{"title": "New Movie", "year": 2024, "description": "A great movie"}'
+```
+
+**View actor's movies:**
+
+```bash
+curl "http://localhost:4000/movies/by-actor/{id}"
+```
+
+**View movie's actors:**
+
+```bash
+curl "http://localhost:4000/actors/by-movie/{id}"
+```
+
+### 📋 API Endpoints Summary
+
+| Endpoint                   | Method | Description       | Auth |
+| -------------------------- | ------ | ----------------- | ---- |
+| `/movies`                  | GET    | List all movies   | No   |
+| `/movies/search?q={query}` | GET    | Search movies     | No   |
+| `/movies/by-actor/{id}`    | GET    | Movies by actor   | No   |
+| `/movies/{id}`             | GET    | Movie details     | No   |
+| `/movies`                  | POST   | Create movie      | Yes  |
+| `/movies/{id}`             | PATCH  | Update movie      | Yes  |
+| `/movies/{id}`             | DELETE | Delete movie      | Yes  |
+| `/actors`                  | GET    | List all actors   | No   |
+| `/actors/search?q={query}` | GET    | Search actors     | No   |
+| `/actors/by-movie/{id}`    | GET    | Actors in movie   | No   |
+| `/actors/{id}`             | GET    | Actor details     | No   |
+| `/actors`                  | POST   | Create actor      | Yes  |
+| `/actors/{id}`             | PATCH  | Update actor      | Yes  |
+| `/actors/{id}`             | DELETE | Delete actor      | Yes  |
+| `/ratings`                 | GET    | List all ratings  | No   |
+| `/ratings/by-movie/{id}`   | GET    | Ratings for movie | No   |
+| `/ratings/{id}`            | GET    | Rating details    | No   |
+| `/ratings`                 | POST   | Create rating     | Yes  |
+| `/ratings/{id}`            | DELETE | Delete rating     | Yes  |
+
+**Authentication:** Bearer token `movie-api-secret-2024` for Create/Update/Delete operations
+
+#### Option 3: Alternative API Testing Tools
+
+**If you prefer other tools:**
+
+**Postman:** Import the Bruno collection as JSON (Bruno can export to Postman format)
+
+**VS Code REST Client:** Use `/tools/api-examples.http` with the REST Client extension
+
+**Insomnia:** Similar to Bruno, can import the collection
+
+**Browser:** GET endpoints work directly in browser:
+
+- http://localhost:4000/movies
+- http://localhost:4000/actors
+- http://localhost:4000/movies/search?q=pulp
 
 ## Tech Stack
 
