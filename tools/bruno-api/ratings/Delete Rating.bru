@@ -14,11 +14,9 @@ auth:bearer {
   token: {{apiToken}}
 }
 
-vars:pre-request {
-  ratingId: 70de3cdf-8084-4906-9676-472e685d7a9b
-}
 
 docs {
   Delete a rating (requires authentication)
   This will automatically recalculate the movie's average rating
+  Ratings are randomly generated so you must retrieve one from the GET all ratings endpoint first.
 }

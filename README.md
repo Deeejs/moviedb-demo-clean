@@ -19,12 +19,24 @@ A full-stack movie database application built with Next.js, NestJS, and Prisma.
 
 ## Quick Start
 
+### One-Command Setup (Quickest)
+
 ```bash
 git clone <repository-url>
 cd moviedb-demo-clean
 
-npm install
+# Copy environment file
+cp apps/backend/.env.example apps/backend/.env
 
+# Run everything in one command
+npm run setup
+```
+
+**Note:** If `npm run setup` fails, please continue with the Docker setup or manual setup.
+
+### Docker Setup (Most Reliable)
+
+```bash
 # Then continue with docker backend/db setup for ease
 # Docker Compose v2 (newer)
 docker compose up
@@ -97,10 +109,12 @@ This will automatically:
    ```bash
    cd apps/backend
    npx prisma generate
+   npx prisma db push
    npx prisma db seed
    ```
 
    This command will:
+   - Create database tables from your schema
    - Seed the database with sample movies, actors, and ratings
 
 5. **Start the development servers**
@@ -147,8 +161,6 @@ moviedb-demo-clean/
 - **Authentication:** Bearer token required for Create/Update/Delete operations
 
 **Authentication Token:** `movie-api-secret-2024`
-
-See [DEMO-SETUP.md](DEMO-SETUP.md) for complete API examples and endpoint table.
 
 ---
 

@@ -8,10 +8,12 @@
     "test": "turbo run test",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
-    "db:setup": "cd apps/backend && npx prisma generate && npx prisma db seed",
+    "build:shared": "cd packages/shared-types && npm run build",
+    "db:setup": "npm run build:shared && cd apps/backend && npx prisma generate && npx prisma db push && npx prisma db seed",
     "db:migrate": "cd apps/backend && npx prisma migrate dev",
     "db:seed": "cd apps/backend && npx prisma db seed",
-    "db:reset": "cd apps/backend && npx prisma migrate reset --force"
+    "db:reset": "cd apps/backend && npx prisma migrate reset --force",
+    "setup": "npm install && npm run db:setup && npm run dev"
   },
   "devDependencies": {
     "prettier": "^3.6.0",

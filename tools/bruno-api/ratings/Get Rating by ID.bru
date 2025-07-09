@@ -5,15 +5,12 @@ meta {
 }
 
 get {
-  url: {{baseUrl}}/ratings/{{ratingId}}
+  url: {{baseUrl}}/ratings/
   body: none
   auth: none
 }
 
-vars:pre-request {
-  ratingId: 70de3cdf-8084-4906-9676-472e685d7a9b
-}
-
 docs {
-  Get a specific rating by ID
+  Get a specific rating by ID with movie and actor details 
+  Ratings are randomly generated so you must retrieve one from the GET all ratings endpoint first.
 }

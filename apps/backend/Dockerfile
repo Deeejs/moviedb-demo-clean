@@ -15,6 +15,9 @@ RUN npm install
 # Copy the rest of the monorepo source code
 COPY . .
 
+# Build shared packages
+RUN cd packages/shared-types && npm run build
+
 # Generate Prisma client
 RUN cd apps/backend && npx prisma generate
 
