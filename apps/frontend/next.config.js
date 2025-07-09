@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ["@movie-app/ui", "@movie-app/shared-types"],
   images: {
     remotePatterns: [
       {
