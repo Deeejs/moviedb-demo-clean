@@ -37,6 +37,11 @@ npm run setup
 ### Docker Setup (Most Reliable)
 
 ```bash
+git clone <repository-url>
+cd moviedb-demo-clean
+
+npm install
+
 # Then continue with docker backend/db setup for ease
 # Docker Compose v2 (newer)
 docker compose up
@@ -149,21 +154,6 @@ moviedb-demo-clean/
 
 ---
 
-## API Documentation
-
-**Complete API Collection:** Import `/tools/bruno-api/` into [Bruno](https://usebruno.com) for interactive testing.
-
-**Key Endpoints:**
-
-- **Movies:** CRUD operations, search by title, get by actor
-- **Actors:** CRUD operations, search by name, get by movie
-- **Ratings:** CRUD operations, get by movie
-- **Authentication:** Bearer token required for Create/Update/Delete operations
-
-**Authentication Token:** `movie-api-secret-2024`
-
----
-
 ## Frontend
 
 The frontend is built with Next.js 14+ App Router:
@@ -202,6 +192,8 @@ npx prisma migrate reset --force
 ## 🔧 API Documentation
 
 ### Option 1: Interactive Testing with Bruno (Recommended)
+
+<img src="./images/bruno-homepage.webp" alt="Bruno Homepage" width="300">
 
 **Bruno** is a modern API testing tool (like Postman). To use the complete API collection:
 
