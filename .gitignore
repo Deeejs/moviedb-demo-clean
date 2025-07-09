@@ -1,0 +1,76 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Local env files
+.env
+.env.*.local
+.env.local
+db.env
+
+# Build Outputs
+/apps/backend/dist/
+/apps/frontend/.next/
+/apps/frontend/out/
+/packages/*/dist/
+/build/
+/dist/
+*.tsbuildinfo
+
+# Turbo
+.turbo
+
+# Vercel
+.vercel
+
+# Testing
+/coverage
+/.nyc_output
+/apps/*/coverage/
+coverage/
+*.lcov
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Prisma
+/apps/backend/generated/prisma
+
+# Misc
+.DS_Store
+*.pem
+next-env.d.ts
+
+# Package manager (keep package-lock.json for dependency locking)
+yarn.lock
+pnpm-lock.yaml
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# IDEs and editors
+.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+
+

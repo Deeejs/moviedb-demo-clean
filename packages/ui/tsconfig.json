@@ -1,0 +1,11 @@
+{
+  "extends": "@movie-app/typescript-config/react-library.json",
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "include": [
+    "src/**/*",
+    "*.tsx"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

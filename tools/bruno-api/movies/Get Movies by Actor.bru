@@ -1,0 +1,19 @@
+meta {
+  name: Get Movies by Actor
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/movies/by-actor/{{actorId}}
+  body: none
+  auth: none
+}
+
+vars:pre-request {
+  actorId: 1
+}
+
+docs {
+  Get all movies featuring a specific actor
+}

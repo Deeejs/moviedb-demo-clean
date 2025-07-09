@@ -1,0 +1,30 @@
+meta {
+  name: Update Actor
+  type: http
+  seq: 6
+}
+
+patch {
+  url: {{baseUrl}}/actors/{{actorId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{apiToken}}
+}
+
+vars:pre-request {
+  actorId: 2ec8dca3-1659-475b-90cb-e3511748f371
+}
+
+body:json {
+  {
+    "name": "Updated Actor Name",
+    "bio": "Updated biography"
+  }
+}
+
+docs {
+  Update an existing actor (requires authentication)
+}

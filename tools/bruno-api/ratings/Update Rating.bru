@@ -1,0 +1,30 @@
+meta {
+  name: Update Rating
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{baseUrl}}/ratings/{{ratingId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{apiToken}}
+}
+
+vars:pre-request {
+  ratingId: 70de3cdf-8084-4906-9676-472e685d7a9b
+}
+
+body:json {
+  {
+    "score": 4.8
+  }
+}
+
+docs {
+  Update an existing rating (requires authentication)
+  This will automatically recalculate the movie's average rating
+}

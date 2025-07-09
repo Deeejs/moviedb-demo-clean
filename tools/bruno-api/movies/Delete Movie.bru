@@ -1,0 +1,23 @@
+meta {
+  name: Delete Movie
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{baseUrl}}/movies/{{movieId}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{apiToken}}
+}
+
+vars:pre-request {
+  movieId: e2704886-9c88-4382-8dd8-cc49ed9ecb30
+}
+
+docs {
+  Delete a movie (requires authentication)
+}

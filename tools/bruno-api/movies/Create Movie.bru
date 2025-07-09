@@ -1,0 +1,32 @@
+meta {
+  name: Create Movie
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/movies
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{apiToken}}
+}
+
+body:json {
+  {
+    "title": "Test Movie",
+    "year": 2024,
+    "director": "Test Director",
+    "runtime": "120 mins",
+    "genres": ["DRAMA", "THRILLER"],
+    "description": "A test movie for API validation",
+    "poster": "https://example.com/poster.jpg",
+    "backdrop": "https://example.com/backdrop.jpg"
+  }
+}
+
+docs {
+  Create a new movie (requires authentication)
+}

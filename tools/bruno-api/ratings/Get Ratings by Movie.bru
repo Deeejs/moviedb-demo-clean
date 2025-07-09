@@ -1,0 +1,19 @@
+meta {
+  name: Get Ratings by Movie
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/ratings/by-movie/{{movieId}}
+  body: none
+  auth: none
+}
+
+vars:pre-request {
+  movieId: e2704886-9c88-4382-8dd8-cc49ed9ecb30
+}
+
+docs {
+  Get all ratings for a specific movie
+}

@@ -1,0 +1,31 @@
+meta {
+  name: Create Actor
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/actors
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{apiToken}}
+}
+
+body:json {
+  {
+    "name": "Test Actor",
+    "birthYear": 1980,
+    "birthPlace": "Los Angeles, CA",
+    "bio": "A test actor for API validation",
+    "image": "https://example.com/actor.jpg",
+    "knownFor": ["Drama", "Action"],
+    "totalMovies": 0
+  }
+}
+
+docs {
+  Create a new actor (requires authentication)
+}

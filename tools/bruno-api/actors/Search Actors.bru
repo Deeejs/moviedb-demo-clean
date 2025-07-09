@@ -1,0 +1,20 @@
+meta {
+  name: Search Actors
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/actors
+  body: none
+  auth: none
+}
+
+params:query {
+  q: travolta
+}
+
+docs {
+  Search actors by name (partial match, case-insensitive)
+  Uses the main /actors endpoint with ?q= parameter
+}

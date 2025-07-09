@@ -1,0 +1,99 @@
+# Movie Database API - HTTP Examples
+# Use this file with VS Code REST Client extension
+# Or copy commands to test with curl
+
+### Variables
+@baseUrl = http://localhost:4000
+@apiToken = movie-api-secret-2024
+
+### Health Check
+GET {{baseUrl}}/health
+
+### Movies - Get All
+GET {{baseUrl}}/movies
+
+### Movies - Search
+GET {{baseUrl}}/movies/search?q=pulp
+
+### Movies - Get by ID
+GET {{baseUrl}}/movies/1
+
+### Movies - Get by Actor
+GET {{baseUrl}}/movies/by-actor/1
+
+### Movies - Create (Auth Required)
+POST {{baseUrl}}/movies
+Content-Type: application/json
+Authorization: Bearer {{apiToken}}
+
+{
+  "title": "Test Movie",
+  "year": 2024,
+  "director": "Test Director",
+  "runtime": "120 mins",
+  "genres": ["DRAMA", "THRILLER"],
+  "description": "A test movie for API validation"
+}
+
+### Movies - Update (Auth Required)
+PATCH {{baseUrl}}/movies/1
+Content-Type: application/json
+Authorization: Bearer {{apiToken}}
+
+{
+  "description": "Updated description"
+}
+
+### Movies - Delete (Auth Required)
+DELETE {{baseUrl}}/movies/1
+Authorization: Bearer {{apiToken}}
+
+### Actors - Get All
+GET {{baseUrl}}/actors
+
+### Actors - Search
+GET {{baseUrl}}/actors/search?q=john
+
+### Actors - Get by ID
+GET {{baseUrl}}/actors/1
+
+### Actors - Get by Movie
+GET {{baseUrl}}/actors/by-movie/1
+
+### Actors - Create (Auth Required)
+POST {{baseUrl}}/actors
+Content-Type: application/json
+Authorization: Bearer {{apiToken}}
+
+{
+  "name": "Test Actor",
+  "birthDate": "1990-01-01",
+  "birthPlace": "Test City",
+  "biography": "A test actor"
+}
+
+### Ratings - Get All
+GET {{baseUrl}}/ratings
+
+### Ratings - Get by Movie
+GET {{baseUrl}}/ratings/by-movie/1
+
+### Ratings - Create (Auth Required)
+POST {{baseUrl}}/ratings
+Content-Type: application/json
+Authorization: Bearer {{apiToken}}
+
+{
+  "movieId": 1,
+  "rating": 8.5,
+  "review": "Great movie!"
+}
+
+### Login (if JWT auth is implemented)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "password"
+}

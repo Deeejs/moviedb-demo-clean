@@ -1,0 +1,28 @@
+{
+  "extends": "@movie-app/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./app/*"],
+      "@/lib/*": ["./lib/*"],
+      "@/hooks/*": ["./hooks/*"],
+      "@/components/*": ["./components/*"],
+      "@/features/*": ["./app/(features)/*"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    "next.config.js",
+    "jest-dom.d.ts",
+    ".next/types/**/*.ts",
+    "../../packages/ui/src/components/molecules/smart-back-button.tsx"
+  ],
+  "exclude": ["node_modules"]
+}

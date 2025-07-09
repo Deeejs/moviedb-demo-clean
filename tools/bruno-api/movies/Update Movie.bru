@@ -1,0 +1,30 @@
+meta {
+  name: Update Movie
+  type: http
+  seq: 6
+}
+
+patch {
+  url: {{baseUrl}}/movies/{{movieId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{apiToken}}
+}
+
+vars:pre-request {
+  movieId: e2704886-9c88-4382-8dd8-cc49ed9ecb30
+}
+
+body:json {
+  {
+    "title": "Updated Movie Title",
+    "description": "Updated description"
+  }
+}
+
+docs {
+  Update an existing movie (requires authentication)
+}

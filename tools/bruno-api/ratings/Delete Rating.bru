@@ -1,0 +1,24 @@
+meta {
+  name: Delete Rating
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{baseUrl}}/ratings/{{ratingId}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{apiToken}}
+}
+
+vars:pre-request {
+  ratingId: 70de3cdf-8084-4906-9676-472e685d7a9b
+}
+
+docs {
+  Delete a rating (requires authentication)
+  This will automatically recalculate the movie's average rating
+}

@@ -1,0 +1,27 @@
+meta {
+  name: Create Rating
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/ratings
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{apiToken}}
+}
+
+body:json {
+  {
+    "score": 4.5,
+    "movieId": "e2704886-9c88-4382-8dd8-cc49ed9ecb30"
+  }
+}
+
+docs {
+  Create a new rating for a movie (requires authentication)
+  This will automatically update the movie's average rating
+}

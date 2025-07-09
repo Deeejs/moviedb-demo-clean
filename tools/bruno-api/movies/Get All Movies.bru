@@ -1,0 +1,15 @@
+meta {
+  name: Get All Movies
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/movies
+  body: none
+  auth: none
+}
+
+docs {
+  Retrieve all movies with cast and ratings included
+}

@@ -1,0 +1,34 @@
+meta {
+  name: Login
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/auth/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "admin@example.com",
+    "password": "password123"
+  }
+}
+
+tests {
+  test("should return 200 OK", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("should return access token", function() {
+    expect(res.getBody()).to.have.property('access_token');
+  });
+  
+  test("should set access token in environment", function() {
+    if (res.getBody().access_token) {
+      bru.setEnvVar("jwt_token", res.getBody().access_token);
+    }
+  });
+}
