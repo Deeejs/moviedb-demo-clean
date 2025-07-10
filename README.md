@@ -4,6 +4,8 @@ A full-stack movie database application built with Next.js, NestJS, and Prisma.
 
 <img src="./images/ui.png" alt="Screenshot of the Movie Database App" width="500">
 
+## 🎬 [Live Demo](https://moviedb-static-demo.vercel.app)
+
 **Below:** Full development documentation
 
 ---
